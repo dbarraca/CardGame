@@ -1,0 +1,4 @@
+{
+    "mongoURI": "mongodb+srv://danielbarraca:zjjhKLVaWskuoi6m@cluster0.vooxe.mongodb.net/CardGame?retryWrites=true&w=majority",
+    "jwtSecret": "carDistry"
+}
