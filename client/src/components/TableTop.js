@@ -1,5 +1,6 @@
 import Player from './Player';
 import CardZones from './CardZones';
+import CardZone from './CardZone';
 
 const TableTop = () => {
     return (
@@ -10,7 +11,11 @@ const TableTop = () => {
 
                         <Player title="Enemy Score" position="Top"/>
 
+                        <CardZone position="Top"/>
+
                         {/* <CardZones /> */}
+
+                        <CardZone position="Bottom"/>
 
                         <Player title="Your Score" position="Bottom"/>
 

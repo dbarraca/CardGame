@@ -45,7 +45,7 @@ $mediaMinWidth: 480px;
   border-radius: 3px;
   border-radius: .222em;
   padding: 0 .25em;
-  margin: 1em;
+  margin: .25em;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -179,58 +179,71 @@ $mediaMinWidth: 480px;
   background-position: center;
 }
 
+.CardZone {
+  border: 2px solid rgba(255,255,255,.5);
+  background-color: rgba(255,255,255,.15);
+  border-radius: 2px;
+}
+
 .CardFlip {
   // transition: transform .9s;
+  background-color: #FFF;
   position: absolute;
   bottom: 0;
   transition: box-shadow .6s ease-in-out, transform .3s ease-out, bottom .3s ease-out, top .3s ease-out;
 }
 
+.CardFlip:hover, .CardZone {
+  position: absolute;
+  background-image: none;
+  box-shadow: none;
+}
+
 .CardFlip.Bottom:hover {
-  transform: translate(9em, -100%) rotateX(180deg);
   transform: translate(10vw, -30vh) rotateX(180deg);
+  bottom: 0;
+}
+
+.CardFlip.Bottom {
   // box-shadow: -2px -1px 4px rgba(0,0,0,.35);
   // background-image: none;
   // top: 50%;
   // bottom: 50%;
-
   // transform: translate(100%, 50%) rotateX(180deg);
   // transform: translate(70%, 100%) rotateX(180deg);
 
   box-shadow: -2px -1px 4px rgba(0,0,0,.35);
-  background-image: none;
-  background-color: #FFF;
-  box-shadow: none;
-  bottom: 50%; 
+}
+
+.CardZone.Bottom {
+  transform: translate(10vw, -30vh);
+  bottom: 0;
 }
 
 .CardFlip.Top:hover {
-  transform: translate(-9em, 100%) rotateX(-180deg);
   transform: translate(-10vw, 30vh) rotateX(-180deg);
-  background-size: 0px;
-  background-color: #FFF;
-  box-shadow: none;
-  // top: 50%;
-  // bottom: 50%;
-  top: 50%; 
-  // transform: translate(-100%, -50%) rotateX(180deg);
-  // transform: translate(-70%, -100%) rotateX(180deg);
-  box-shadow: -2px -1px 4px rgba(0,0,0,.35);
-  background-image: none;
+  top: 0; 
+}
+
+.CardZone.Top {
+  transform: translate(-10vw, 30vh);
+  top: 0;
 }
 
 .Score {
   position: absolute;
-  left: -120px;
-  background-image: linear-gradient(90deg, transparent, rgba(20, 20, 20, 0.8) 20%,
-   rgba(20, 20, 20, 1),  rgba(20, 20, 20, 0.9) 80%,  transparent 100%);
-  padding: .1em 4em;
+  transform: translateX(-50%);
+  background-image: linear-gradient(90deg, transparent, rgba(20, 20, 20, .95) 20%, #141414, rgba(20, 20, 20, .95) 80%, transparent 100%);
+  background-image: linear-gradient(90deg, transparent, rgba(2, 2, 20, .95) 20%, rgb(2, 2, 20), rgba(2, 2, 20, .95) 80%, transparent 100%);
+  padding: 0 2em;
   color: #FFF;
-  bottom: 40px;
+  bottom: 0;
   font-weight: 600;
   z-index: 10;
   text-align: center;
-  font-size: 16px;
+  font-size: 18px;
+  width: 133%;
+  left: 50%;
   // box-shadow: 0 5px 10px -6px rgba(0,0,0,.5);
 }
 
@@ -244,9 +257,54 @@ $mediaMinWidth: 480px;
 }
 
 
+.Login {
+  font-size: 2rem;
+  background-image: url('./CardsScattedUp.jpg');
+  padding: 122px 50px;
+  background-size: cover;
+  border-radius: 6px;
+  box-shadow: 0 0 20px rgba(0,0,0,.3);
 
+  h1 {
+    color:#d12d36;
+    // text-shadow:  2px -3px 0 rgba(255,255,255,1), 0 3px 5px rgba(0,0,0,.5);
+    background-color: rgba(255,255,255,.98);
+    padding: 0 10px;
+    border-radius: 2px;
+    box-shadow: 0 0 5px rgba(0,0,0,.5);
+    margin-bottom: 1em;
+    margin-top: 0;
+    font-weight: 600;
+    // text-decoration: underline;
+  }
+}
 
+.LoginForm {
+  padding: 1em;
+  background-color: rgba(255,255,255,.98);
+  box-shadow: 0 2px 5px rgba(0,0,0,.5);
+  display: flex;
+  flex-direction: column;
+  border-radius: 8px;
 
+  h2 {
+    margin: 0 0 10px 0;
+    text-align: center;
+    // font-weight: 600;
+    font-weight: normal;
+    // text-decoration: underline;
+  }
+
+  input, button{
+    margin: 10px;
+    font-size: 18px;
+  }
+
+  p {
+    font-size: 16px;
+    text-align: center;
+  }
+}
 
 
 
