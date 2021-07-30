@@ -107,8 +107,10 @@ $mediaMinWidth: 480px;
   min-height: 600px;
   overflow: hidden;
   border-radius: 40em;
-  box-shadow: 0 5px 20px 9px inset rgba(0,0,0,.50),
-   0 0 4px 9px inset rgba(0,0,0,.20);
+  box-shadow:
+   0 5px 20px 9px inset rgba(0,0,0,.50),
+   0 0 4px 9px inset rgba(0,0,0,.20),
+   -6px 8px 5px 12px inset rgba(0,0,0,.2);
 
   // display: flex;
   // justify-content: center;
@@ -134,7 +136,7 @@ $mediaMinWidth: 480px;
 */
 
 .TableOverlay {
-  background-image: radial-gradient(circle, transparent 10%, rgba(255,255,255, 0.05), transparent 50%, rgba(0, 0, 0, 0.35));
+  background-image: radial-gradient(circle, transparent 10%, rgba(255,255,255, 0.1), transparent 50%, rgba(0, 0, 0, 0.35));
   display: flex;
   justify-content: center;
   align-items: center;
@@ -183,6 +185,7 @@ $mediaMinWidth: 480px;
   border: 2px solid rgba(255,255,255,.5);
   background-color: rgba(255,255,255,.15);
   border-radius: 2px;
+  // z-index: 12;
 }
 
 .CardFlip {
@@ -191,13 +194,16 @@ $mediaMinWidth: 480px;
   position: absolute;
   bottom: 0;
   transition: none;
+  // transition-delay: opacity .1s;
   z-index: 10;
   // transition: box-shadow .6s ease-in-out, transform .3s ease-out, bottom .3s ease-out, top .3s ease-out;
 }
 
 // .CardFlip:hover {
 .Flipping {
-  transition: box-shadow .6s ease-in-out, transform .3s ease-out, bottom .3s ease-out, top .3s ease-out;
+  // z-index: 0;
+  opacity: 0;
+  transition: box-shadow .6s ease-in-out, transform .3s ease-out, bottom .3s ease-out, top .3s ease-out, opacity .3s ease-in;
 }
 
 // .CardFlip:hover, .CardZone {
@@ -334,10 +340,12 @@ $mediaMinWidth: 480px;
 @media (max-width: $mediaBp2) {
   .App {
     font-size: 14px;
+
+    
   }
 
   .Table {
-    width: 60vw;
+    width: auto;
   }
 }
 

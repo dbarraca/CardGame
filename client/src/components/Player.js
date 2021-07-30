@@ -1,13 +1,16 @@
-import Deck from './Deck';
+import { useState } from 'react';
+
+import Hand from './Hand';
 import Score from './Score';
 import CardFlip from './CardFlip';
 
-const Player = ({ title, position }) => {
+const Player = ({ title, position, flipping, handleDraw}) => {
+
     return (
         <div className={`Player ${position}`}>
             <Score title={title} />
-            <CardFlip position={position}/>
-            <Deck position={position}/>
+            <CardFlip handleDraw={handleDraw} flipping={flipping}/>
+            <Hand position={position}/>
         </div>
     )
 }

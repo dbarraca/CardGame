@@ -1,29 +1,53 @@
 
 
-const Card = ({ Suit, Number }) => {
-    let SuitIcon;
+const Card = ({  Num, Suit }) => {
+    let NumIcon= '', SuitIcon = '', SuitClass = '';
+
+    switch (Num) {
+        case 0:
+            NumIcon = 'A';
+            break;
+        case 10:
+            NumIcon = 'J';
+            break;
+        case 11:
+            NumIcon = 'Q';
+            break;
+        case 12:
+            NumIcon = 'K';
+            break;
+        case -1:
+            NumIcon = '';
+            break;
+        default:
+            NumIcon = '' + (Num+1);   
+    }
 
     switch (Suit) {
-        case "Hearts":
+        case 0:
             SuitIcon = '\u2660';
+            SuitClass = 'Spades';
             break;
-        case "Spades":
+        case 1:
             SuitIcon = '\u2665';
+            SuitClass= 'Hearts';
             break;
-        case "Diamonds":
+        case 2:
             SuitIcon = '\u2666';
+            SuitClass= 'Diamonds';
             break;
-        case "Clubs":
+        case 3:
             SuitIcon = '\u2663';
+            SuitClass= 'Clubs';
             break;
         default:       
     }
 
     return (
-        <div className={`Card ${Suit}`}>
-            <div className="Number">A</div>
+        <div className={`Card ${SuitClass}`}>
+            <div className="Number">{NumIcon}</div>
             <div className="Suit">{SuitIcon}</div>
-            <div className="Number">A</div>
+            <div className="Number">{NumIcon}</div>
         </div>
     );
 }

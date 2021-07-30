@@ -1,5 +1,5 @@
 import './App.scss';
-import TableTop from './components/TableTop';
+import Table from './components/Table';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -18,7 +18,7 @@ function App() {
         </Route>
 
         <Route path="/Game">
-          <TableTop />
+          <Table />
         </Route>
 
       </div>
