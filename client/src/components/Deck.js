@@ -1,6 +1,6 @@
 const Deck = ({ position }) => {
     return (
-        <div className={`CardFlip Deck Card UpsideDown ${position}`}>
+        <div className={`Deck Card UpsideDown ${position}`}>
         </div>
     )
 }

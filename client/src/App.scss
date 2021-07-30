@@ -190,21 +190,31 @@ $mediaMinWidth: 480px;
   background-color: #FFF;
   position: absolute;
   bottom: 0;
+  transition: none;
+  z-index: 10;
+  // transition: box-shadow .6s ease-in-out, transform .3s ease-out, bottom .3s ease-out, top .3s ease-out;
+}
+
+// .CardFlip:hover {
+.Flipping {
   transition: box-shadow .6s ease-in-out, transform .3s ease-out, bottom .3s ease-out, top .3s ease-out;
 }
 
-.CardFlip:hover, .CardZone {
+// .CardFlip:hover, .CardZone {
+.Flipping, .CardZone {
   position: absolute;
-  background-image: none;
+  // background-image: none;
   box-shadow: none;
 }
 
-.CardFlip.Bottom:hover {
+// .CardFlip.Bottom:hover {
+.Bottom .CardFlip.Flipping {
   transform: translate(10vw, -30vh) rotateX(180deg);
   bottom: 0;
 }
 
-.CardFlip.Bottom {
+// .CardFlip.Bottom {
+.Bottom .CardFlip.Flipping {
   // box-shadow: -2px -1px 4px rgba(0,0,0,.35);
   // background-image: none;
   // top: 50%;
@@ -220,7 +230,8 @@ $mediaMinWidth: 480px;
   bottom: 0;
 }
 
-.CardFlip.Top:hover {
+// .CardFlip.Top:hover {
+.Top .Flipping {
   transform: translate(-10vw, 30vh) rotateX(-180deg);
   top: 0; 
 }
@@ -239,7 +250,7 @@ $mediaMinWidth: 480px;
   color: #FFF;
   bottom: 0;
   font-weight: 600;
-  z-index: 10;
+  z-index: 11;
   text-align: center;
   font-size: 18px;
   width: 133%;
