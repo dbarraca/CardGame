@@ -8,7 +8,7 @@ const Player = ({ player, flipping, handleDraw}) => {
 
     return (
         <div className={`Player ${player.position}`}>
-            <Score title={player.title} score={player.score}/>
+            <Score title={player.title} score={player.hand.length}/>
             <CardFlip handleDraw={handleDraw} flipping={flipping}/>
             <Hand position={player.position}/>
         </div>

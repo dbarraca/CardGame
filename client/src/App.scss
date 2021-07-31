@@ -23,8 +23,23 @@ $mediaMinWidth: 480px;
   background-image: url('./classy_fabric.png');
 }
 
+// .winnerMsg {
+//   color: #d12d36;
+//   // background-color: #FFF;
+//   font-size: 3em;
+//   text-shadow: 2px 2px 15px rgba(0,0,0,.8), 3px 3px #8c5e61, 3px 3px 15px rgba(0,0,0,.8);
+//   padding: 6px;
+// }
+
+.winnerMsg {
+  font-size: 3em;
+  text-shadow: 2px -2px 4px rgba(0,0,0,.2), 2px -2px #d12d36, 3px -3px #d12d36, 3px 3px 8px rgba(2,0,0,.8);
+  padding: 6px;
+  color: #d12d36;
+}
+
 .NewGame {
-  position:fixed;
+  position: fixed;
   left: 1em;
   top: 1em;
   font-size: 2em;

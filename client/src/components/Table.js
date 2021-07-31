@@ -1,26 +1,44 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import PlayerSide from './PlayerSide';
 import CardZones from './CardZones';
 
 const Table = () => {
+    const [winner, setWinner] = useState();
+    const [waiting, setWaiting] = useState(-1);
+    const [inWar, setInWar] = useState(false);
+
     const [players, setPlayers] = useState([
         {
             id: 1,
-            title: "Enemy Cards",
-            position: "Top" ,
-            score: 0,
-            hand: []
+            title: "Player 1",
+            position: "Top",
+            hand: [],
+            drawnCard: -1
         },
         {
             id: 2,
-            title: "Your Cards",
-            position: "Bottom" ,
-            score: 0,
-            hand: []
+            title: "Player 2",
+            position: "Bottom",
+            hand: [],
+            drawnCard: -1
         }
     ]);
+    const refPlayers = useRef(players);
+
 
     const [playedCards, setPlayedCards] = useState([]);
+    const refPlayedCards = useRef(playedCards);
+    
+    // Keeps the state and ref equal
+    function updatePlayedCards(newState) {
+        refPlayedCards.current = newState;
+        setPlayedCards(newState);
+    }
+
+    function updatePlayers(newState) {
+        refPlayers.current = newState;
+        setPlayers(newState);
+    }
 
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
@@ -30,6 +48,8 @@ const Table = () => {
         let curCard;
         let dealtCards = [];
 
+        setWinner(-1);
+
         for (let cardCount = 0; cardCount < 52; cardCount++) {
             do{
                 curCard = getRandomInt(52);
@@ -38,49 +58,136 @@ const Table = () => {
             dealtCards.push(curCard);
         }
 
-        console.log(dealtCards);
-
-        setPlayers([ 
-            { ...players[0], hand: [...dealtCards.slice(0, 26)] } ,
-            { ...players[1], hand: [...dealtCards.slice(26)] } 
+        updatePlayers([ 
+            { ...players[0], hand: dealtCards.slice(0, 26), drawnCard: -1 } ,
+            { ...players[1], hand: dealtCards.slice(26), drawnCard: -1 } 
         ]);
 
-        setPlayedCards([]);
+        updatePlayedCards([]);
     }
-    
-    const drawCard = (drawingPlayer) => {
-        let card = players[drawingPlayer].hand[0];
-        setPlayedCards([...playedCards, card]);
 
-        setPlayers(players.map((curPlayer, index) => {
-            let curHand = players[index].hand;
+    const getRank = (cardCode) => {
+        return cardCode % 13;
+    }
 
-            return(
-                { ...curPlayer, hand:
-                drawingPlayer === index ?
-                curHand.slice(1, curHand.length)
-                :
-                curHand
-                }
-            )
-        }));
+    const compareCards = () => {
+        const played = refPlayedCards.current;
+        const rank1 = getRank(refPlayers.current[0].drawnCard);
+        const rank2 = getRank(refPlayers.current[1].drawnCard);
+        const player1 = refPlayers.current[0];
+        const player2 = refPlayers.current[1];
+
+        // console.log(rank1, rank2);
+        // console.log(played);
+
+        if(rank1 === rank2) {
+            setInWar(true);
+            
+            console.log("War");
+            drawCard(players[0].id);
+            drawCard(players[0].id);
+            drawCard(players[0].id);
+            drawCard(players[1].id);
+            drawCard(players[1].id);
+            drawCard(players[1].id);
+
+            console.log(refPlayedCards.current);
+
+        } else {
+
+            if (rank1 > rank2) {
+                // console.log("player 1 greater rank");
+                updatePlayers([ { ...player1, hand: [ ...player1.hand, ...played ], drawnCard: -1 }, { ...player2, drawnCard: -1} ]);
+            }
+            else {
+                // console.log("player 2 greater rank");
+                updatePlayers([{ ...player1, drawnCard: -1 } , { ...player2, hand: [ ...player2.hand, ...played ], drawnCard: -1 }]) ;
+            }
+            
+            updatePlayedCards([]);
+        }
+
+
+        setWaiting(-1);
+    }
+
+    const drawCard = (drawingPlayerID) => {
+        let drawingPlayer = refPlayers.current.find(player => player.id === drawingPlayerID);
+
+        if(drawingPlayer.hand.length === 0) {
+            setWinner(refPlayers.current.find(player => player.id !== drawingPlayerID).title);
+
+           return -1;
+        }
+        else {
+            let card = drawingPlayer.hand[0];
+
+            updatePlayedCards([...refPlayedCards.current, card]);
+
+            updatePlayers(refPlayers.current.map((curPlayer) => {
+                let curHand = curPlayer.hand;
+
+                return(
+                    { 
+                        ...curPlayer, 
+                        hand:
+                            drawingPlayerID === curPlayer.id ?
+                            curHand.slice(1, curHand.length)
+                            :
+                            curHand,
+                        drawnCard:
+                            drawingPlayerID === curPlayer.id ?
+                            card
+                            :
+                            curPlayer.drawnCard
+                    }
+                )
+            }));
+
+            console.log("Drawn Card", card);
+
+            return card;
+        }
+    }
+
+    const normalDraw = (drawingPlayerID) => {
+        let card = drawCard(drawingPlayerID);
+
+        if (waiting < 0) {
+            setWaiting(drawingPlayerID);
+        }
+        else {
+            setTimeout(() => {
+                compareCards();
+            }, 400);
+        }
 
         return card;
     }
 
     return (
         <>
-            <button className="NewGame" onClick={dealHands}>New Game</button>
+            <button className="NewGame" onClick={dealHands}>Deal Cards</button>
 
             <div className="Table">
                 <div className="ArmRest">
                     <div className="TableTop">
                         <div className="TableOverlay">
-                            {players.map((player, index) => {
-                                return(
-                                    <PlayerSide player={player} playerIndex={index} key={index} drawCard={drawCard} /> 
-                                )
-                            })}
+                            {
+                                winner && winner >= 0 ?
+
+                                <div className="winnerMsg">
+                                    <h1>{winner} Won</h1>
+                                </div>
+
+                                :
+                                
+                                players.map( (player, index) => {
+                                    return(
+                                        <PlayerSide waiting={waiting} player={player} key={index} drawCard={normalDraw} /> 
+                                    )
+                                })
+                            }
 
                             {/* <PlayerSide title="Enemy Cards" position="Top" drawCard={drawCard} /> */}
                             {/* <CardZones /> */}

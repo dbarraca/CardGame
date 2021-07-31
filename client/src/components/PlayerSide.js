@@ -2,15 +2,11 @@ import { useState } from 'react';
 import Player from './Player';
 import CardZone from './CardZone';
 
-const PlayerSide = ( { player, drawCard, playerIndex } ) => {
-    const [hand, setHand] = useState([]);
-
+const PlayerSide = ({ waiting, player, drawCard }) => {
     const [flipping, setFlipping] = useState(false);
-    // const [drawnNum, setDrawnNum] = useState(-1);
-    const [drawnCard, setdrawnCard] = useState(-1);
+    // const [drawnCard, setdrawnCard] = useState(-1);
 
     const flipCard = () => {
-        // console.log("flip card functin called");
         setFlipping(true);
 
         setTimeout(() => {
@@ -19,21 +15,15 @@ const PlayerSide = ( { player, drawCard, playerIndex } ) => {
     }
 
     const handleDraw = () => {
-        // console.log("handleDraw functin called");
-        flipCard();
-
-        // const [num, suit] = drawCard();
-        // console.log("PlayerSide",num);
-        // console.log("PlayerSide",suit);
-
-        // setDrawnNum(num);
-        // setDrawnSuit(suit);
-        setdrawnCard(drawCard((playerIndex)));
+        if (waiting !== player.id) {
+            flipCard();
+            drawCard(player.id);
+        }
     }
 
     return (
         <>
-            <CardZone position={player.position} drawnCard={drawnCard}/>
+            <CardZone position={player.position} drawnCard={player.drawnCard}/>
 
             <Player player={player} handleDraw={handleDraw} flipping={flipping}/>
         </>
