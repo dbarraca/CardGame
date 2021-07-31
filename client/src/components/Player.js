@@ -4,13 +4,13 @@ import Hand from './Hand';
 import Score from './Score';
 import CardFlip from './CardFlip';
 
-const Player = ({ title, position, flipping, handleDraw}) => {
+const Player = ({ player, flipping, handleDraw}) => {
 
     return (
-        <div className={`Player ${position}`}>
-            <Score title={title} />
+        <div className={`Player ${player.position}`}>
+            <Score title={player.title} score={player.score}/>
             <CardFlip handleDraw={handleDraw} flipping={flipping}/>
-            <Hand position={position}/>
+            <Hand position={player.position}/>
         </div>
     )
 }

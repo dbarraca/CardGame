@@ -23,6 +23,25 @@ $mediaMinWidth: 480px;
   background-image: url('./classy_fabric.png');
 }
 
+.NewGame {
+  position:fixed;
+  left: 1em;
+  top: 1em;
+  font-size: 2em;
+  border: none;
+  padding: .25em;
+  box-shadow: 1px 1px 9px 2px rgba(0,0,0,.35);
+  border-radius: 4px;
+  background-color:#d12d36;
+  color:#FFF;
+  transition: box-shadow .2s;
+}
+
+.NewGame:active {
+  box-shadow: none;
+}
+
+
 .Card {
   box-shadow: 2px 1px 4px rgba(0,0,0,.35);
   background-image: url('./creampaperLowOpac.png');

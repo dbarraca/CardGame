@@ -1,7 +1,11 @@
 
 
-const Card = ({  Num, Suit }) => {
+const Card = ({ cardCode }) => {
     let NumIcon= '', SuitIcon = '', SuitClass = '';
+    let Num = cardCode % 13;
+    let Suit = Math.floor(cardCode / 13);
+
+    // console.log("Num: ", Num, ", Suit: " , Suit);
 
     switch (Num) {
         case 0:

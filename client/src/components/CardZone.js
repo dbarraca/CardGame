@@ -1,9 +1,9 @@
 import Card from './Card';
 
-const CardZone = ({ position, drawnNum, drawnSuit }) => {
+const CardZone = ({ position, drawnCard }) => {
     return (
         <div className={`CardZone ${position}`}>
-            <Card Num={drawnNum} Suit={drawnSuit}/>
+            <Card cardCode={drawnCard}/>
         </div>
     );
 }

@@ -1,8 +1,8 @@
-const Score = ({ title }) => {
+const Score = ({ title, score }) => {
     return (
         <div className="Score">
             <div className="Title">{title}</div>
-            <div className="scoreNum">1000</div>
+            <div className="scoreNum">{score}</div>
         </div>
     )
 }

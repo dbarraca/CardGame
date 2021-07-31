@@ -1,44 +1,95 @@
+import { useState } from 'react';
 import PlayerSide from './PlayerSide';
 import CardZones from './CardZones';
 
 const Table = () => {
-    const Deck = [];
+    const [players, setPlayers] = useState([
+        {
+            id: 1,
+            title: "Enemy Cards",
+            position: "Top" ,
+            score: 0,
+            hand: []
+        },
+        {
+            id: 2,
+            title: "Your Cards",
+            position: "Bottom" ,
+            score: 0,
+            hand: []
+        }
+    ]);
 
+    const [playedCards, setPlayedCards] = useState([]);
 
     function getRandomInt(max) {
         return Math.floor(Math.random() * max);
     }
 
-    const drawCard = () => {
-        let num = getRandomInt(13);
-        let suit = getRandomInt(4);
+    const dealHands = () => {
+        let curCard;
+        let dealtCards = [];
 
-        // console.log("Table",num);
-        // console.log("Table",suit);
+        for (let cardCount = 0; cardCount < 52; cardCount++) {
+            do{
+                curCard = getRandomInt(52);
+            } while(dealtCards.indexOf(curCard) >= 0);
 
-        // if(!Deck[num]) {
-        //     Deck[num] = new Array();
-        // }
+            dealtCards.push(curCard);
+        }
 
-        // Deck[num][suit] = true;
+        console.log(dealtCards);
 
-        return [num, suit];
+        setPlayers([ 
+            { ...players[0], hand: [...dealtCards.slice(0, 26)] } ,
+            { ...players[1], hand: [...dealtCards.slice(26)] } 
+        ]);
+
+        setPlayedCards([]);
+    }
+    
+    const drawCard = (drawingPlayer) => {
+        let card = players[drawingPlayer].hand[0];
+        setPlayedCards([...playedCards, card]);
+
+        setPlayers(players.map((curPlayer, index) => {
+            let curHand = players[index].hand;
+
+            return(
+                { ...curPlayer, hand:
+                drawingPlayer === index ?
+                curHand.slice(1, curHand.length)
+                :
+                curHand
+                }
+            )
+        }));
+
+        return card;
     }
 
     return (
-        <div className="Table">
-            <div className="ArmRest">
-                <div className="TableTop">
-                    <div className="TableOverlay">
-                        <PlayerSide title="Enemy Score" position="Top" drawCard={drawCard}/>
+        <>
+            <button className="NewGame" onClick={dealHands}>New Game</button>
 
-                        {/* <CardZones /> */}
+            <div className="Table">
+                <div className="ArmRest">
+                    <div className="TableTop">
+                        <div className="TableOverlay">
+                            {players.map((player, index) => {
+                                return(
+                                    <PlayerSide player={player} playerIndex={index} key={index} drawCard={drawCard} /> 
+                                )
+                            })}
 
-                        <PlayerSide title="Your Score" position="Bottom" drawCard={drawCard}/>
+                            {/* <PlayerSide title="Enemy Cards" position="Top" drawCard={drawCard} /> */}
+                            {/* <CardZones /> */}
+                            {/* <PlayerSide title="Your Cards" position="Bottom" drawCard={drawCard}/> */}
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </>
     );
 }
 
