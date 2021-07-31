@@ -1,11 +1,13 @@
 import { useState, useRef } from 'react';
 import PlayerSide from './PlayerSide';
-import CardZones from './CardZones';
 
 const Table = () => {
     const [winner, setWinner] = useState();
+
+    const [wonTurn, setWonTurn] = useState("");
+
     const [waiting, setWaiting] = useState(-1);
-    const [inWar, setInWar] = useState(false);
+    const refWaiting = useRef(waiting);
 
     const [players, setPlayers] = useState([
         {
@@ -29,7 +31,12 @@ const Table = () => {
     const [playedCards, setPlayedCards] = useState([]);
     const refPlayedCards = useRef(playedCards);
     
-    // Keeps the state and ref equal
+     // Keeps the state and ref equal
+    function updateWaiting(newState) {
+        refWaiting.current = newState;
+        setWaiting(newState);
+    }
+
     function updatePlayedCards(newState) {
         refPlayedCards.current = newState;
         setPlayedCards(newState);
@@ -48,7 +55,8 @@ const Table = () => {
         let curCard;
         let dealtCards = [];
 
-        setWinner(-1);
+        setWinner("");
+        updateWaiting(-1);
 
         for (let cardCount = 0; cardCount < 52; cardCount++) {
             do{
@@ -59,7 +67,7 @@ const Table = () => {
         }
 
         updatePlayers([ 
-            { ...players[0], hand: dealtCards.slice(0, 26), drawnCard: -1 } ,
+            { ...players[0], hand: dealtCards.slice(0,26), drawnCard: -1 } ,
             { ...players[1], hand: dealtCards.slice(26), drawnCard: -1 } 
         ]);
 
@@ -81,41 +89,49 @@ const Table = () => {
         // console.log(played);
 
         if(rank1 === rank2) {
-            setInWar(true);
+            // setInWar(true);
             
             console.log("War");
             drawCard(players[0].id);
-            drawCard(players[0].id);
-            drawCard(players[0].id);
+            // drawCard(players[0].id);
+            // drawCard(players[0].id);
             drawCard(players[1].id);
-            drawCard(players[1].id);
-            drawCard(players[1].id);
+            // drawCard(players[1].id);
+            // drawCard(players[1].id);
 
             console.log(refPlayedCards.current);
 
         } else {
+            // setInWar(false);
 
             if (rank1 > rank2) {
                 // console.log("player 1 greater rank");
                 updatePlayers([ { ...player1, hand: [ ...player1.hand, ...played ], drawnCard: -1 }, { ...player2, drawnCard: -1} ]);
+                setWonTurn("TopWonTurn");
             }
             else {
                 // console.log("player 2 greater rank");
                 updatePlayers([{ ...player1, drawnCard: -1 } , { ...player2, hand: [ ...player2.hand, ...played ], drawnCard: -1 }]) ;
+                setWonTurn("BottomWonTurn");
             }
             
+            // setWonTurn(``);
+            setTimeout(() => {
+                setWonTurn("");
+            }, 500);
+
             updatePlayedCards([]);
         }
 
-
-        setWaiting(-1);
+        updateWaiting(-1);
     }
 
     const drawCard = (drawingPlayerID) => {
         let drawingPlayer = refPlayers.current.find(player => player.id === drawingPlayerID);
 
-        if(drawingPlayer.hand.length === 0) {
+        if(!winner && drawingPlayer.hand.length <= 0) {
             setWinner(refPlayers.current.find(player => player.id !== drawingPlayerID).title);
+            // console.log(`${winner} Won`);
 
            return -1;
         }
@@ -153,13 +169,13 @@ const Table = () => {
     const normalDraw = (drawingPlayerID) => {
         let card = drawCard(drawingPlayerID);
 
-        if (waiting < 0) {
-            setWaiting(drawingPlayerID);
+        if (refWaiting.current < 0) {
+            updateWaiting(drawingPlayerID);
         }
         else {
             setTimeout(() => {
                 compareCards();
-            }, 400);
+            }, 900);
         }
 
         return card;
@@ -171,10 +187,10 @@ const Table = () => {
 
             <div className="Table">
                 <div className="ArmRest">
-                    <div className="TableTop">
+                    <div className={`TableTop ${wonTurn}`}>
                         <div className="TableOverlay">
                             {
-                                winner && winner >= 0 ?
+                                winner ?
 
                                 <div className="winnerMsg">
                                     <h1>{winner} Won</h1>
@@ -184,14 +200,10 @@ const Table = () => {
                                 
                                 players.map( (player, index) => {
                                     return(
-                                        <PlayerSide waiting={waiting} player={player} key={index} drawCard={normalDraw} /> 
+                                        <PlayerSide waiting={refWaiting.current} player={player} key={index} drawCard={normalDraw} /> 
                                     )
                                 })
                             }
-
-                            {/* <PlayerSide title="Enemy Cards" position="Top" drawCard={drawCard} /> */}
-                            {/* <CardZones /> */}
-                            {/* <PlayerSide title="Your Cards" position="Bottom" drawCard={drawCard}/> */}
                         </div>
                     </div>
                 </div>

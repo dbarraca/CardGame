@@ -5,26 +5,24 @@ const Card = ({ cardCode }) => {
     let Num = cardCode % 13;
     let Suit = Math.floor(cardCode / 13);
 
-    // console.log("Num: ", Num, ", Suit: " , Suit);
-
     switch (Num) {
-        case 0:
+        case 12:
             NumIcon = 'A';
             break;
-        case 10:
+        case 9:
             NumIcon = 'J';
             break;
-        case 11:
+        case 10:
             NumIcon = 'Q';
             break;
-        case 12:
+        case 11:
             NumIcon = 'K';
             break;
         case -1:
             NumIcon = '';
             break;
         default:
-            NumIcon = '' + (Num+1);   
+            NumIcon = '' + (Num + 2);   
     }
 
     switch (Suit) {

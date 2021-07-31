@@ -21,6 +21,7 @@ $mediaMinWidth: 480px;
   min-height: 100vh;
   background-color: #444;
   background-image: url('./classy_fabric.png');
+  transition: font-size .3s;
 }
 
 // .winnerMsg {
@@ -56,11 +57,17 @@ $mediaMinWidth: 480px;
   box-shadow: none;
 }
 
-
-.Card {
-  box-shadow: 2px 1px 4px rgba(0,0,0,.35);
+/*.Card.Hearts, .Card.Clubs,
+.Card.Spades, .Card.Diamonds  {
   background-image: url('./creampaperLowOpac.png');
   background-color: #FFF;
+  box-shadow: 2px 1px 4px rgba(0,0,0,.35);
+}*/
+
+.Card {
+  background-image: url('./creampaperLowOpac.png');
+  background-color: #FFF;
+  box-shadow: 2px 1px 4px rgba(0,0,0,.35);
   background-repeat: repeat;
   // border: 1px solid #EEE;
 
@@ -123,6 +130,7 @@ $mediaMinWidth: 480px;
   margin: auto;
   // margin: 5em;
   box-shadow: 0px 20px 50px rgba(0,0,0,.5), 0px 10px 20px rgba(0,0,0,.2);
+  transition: width .2s;
 }
 
 .ArmRest {
@@ -213,6 +221,7 @@ $mediaMinWidth: 480px;
   background-size: calc(100% - .6em) calc(100% - .6em);
   background-repeat: no-repeat;
   background-position: center;
+  box-shadow: 2px 1px 4px rgba(0,0,0,.35);
 }
 
 .CardZone {
@@ -220,7 +229,52 @@ $mediaMinWidth: 480px;
   background-color: rgba(255,255,255,.15);
   border-radius: 2px;
   // z-index: 12;
+  transition: none;
 }
+
+.CardZone .Card {
+  opacity: .25;
+}
+
+.CardZone .Card:hover {
+  transform: none;
+}
+
+.CardZone {
+  .Card.Clubs, .Card.Hearts,
+  .Card.Diamonds, .Card.Spades {
+    opacity: 1;
+  }
+}
+
+.TopWonTurn .CardZone,
+.BottomWonTurn .CardZone {
+  transition: .4s;
+  transform: none !important;
+  border: none;
+  border: 1px solid rgba(242, 192, 75, .5);
+  background-color: rgba(242, 192, 75, .5);
+}
+
+
+.TopWonTurn .CardZone {
+  top: 0 !important;
+  bottom: auto !important;
+
+}
+
+.BottomWonTurn .CardZone {
+  top: auto !important;
+  bottom: 0 !important;
+}
+
+.BottomWonTurn.CardZone, .TopWonTurn.CardZone {
+  .Card.Clubs, .Card.Hearts,
+  .Card.Diamonds, .Card.Spades {
+    opacity: .9;
+  }
+}
+
 
 .CardFlip {
   // transition: transform .9s;
@@ -369,18 +423,20 @@ $mediaMinWidth: 480px;
   .App {
     font-size: 16px;
   }
+
+  .Table {
+    max-width: 80vw;
+  }
 }
 
 @media (max-width: $mediaBp2) {
   .App {
-    font-size: 14px;
-
-    
+    font-size: 14px; 
   }
 
-  // .Table {
-  //   width: auto;
-  // }
+  .Table {
+    max-width: 70vw;
+  }
 }
 
 @media (max-width: $mediaBp3) {

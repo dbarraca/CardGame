@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import Hand from './Hand';
 import Score from './Score';
 import CardFlip from './CardFlip';

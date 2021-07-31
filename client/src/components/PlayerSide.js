@@ -4,7 +4,6 @@ import CardZone from './CardZone';
 
 const PlayerSide = ({ waiting, player, drawCard }) => {
     const [flipping, setFlipping] = useState(false);
-    // const [drawnCard, setdrawnCard] = useState(-1);
 
     const flipCard = () => {
         setFlipping(true);
