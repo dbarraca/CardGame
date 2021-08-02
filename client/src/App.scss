@@ -18,6 +18,7 @@ $mediaMinWidth: 480px;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  // padding-top: 1.5em;
   min-height: 100vh;
   background-color: #444;
   background-image: url('./classy_fabric.png');
@@ -54,10 +55,21 @@ $mediaMinWidth: 480px;
   color: #d12d36;
 }
 
-.NewGame {
-  position: fixed;
-  left: 1em;
-  top: 1em;
+.GameButtons {
+  display: flex;
+  flex-direction: row;
+  // position: absolute;
+  // right: 10px;
+  // bottom: 10px;
+  width: 100%;
+  justify-content: flex-end;
+  // padding-top: 0em;
+}
+
+.NewGame, .LeaderboardButton {
+  // position: fixed;
+  // left: 1em;
+  // top: 1em;
   font-size: 2em;
   border: none;
   padding: .25em;
@@ -66,10 +78,21 @@ $mediaMinWidth: 480px;
   background-color:#d12d36;
   color:#FFF;
   transition: box-shadow .2s;
+  margin-right: 1em;
+  margin-bottom: 1em;
 }
 
 .NewGame:active {
   box-shadow: none;
+  color:#d12d36;
+  background-color:#FFF;
+}
+
+.LeaderboardButton {
+  text-decoration: none;
+  color:#d12d36;
+  background-color:#FFF;
+  border: none;
 }
 
 /*.Card.Hearts, .Card.Clubs,
@@ -139,13 +162,13 @@ $mediaMinWidth: 480px;
 
 .Table {
   min-height: 60vh;
-  overflow: hidden;
-  border-radius: 25em;
+  // overflow: hidden;
+  // border-radius: 25em;
   width: 80vw;
   margin: auto;
   // margin: 5em;
-  box-shadow: 0px 20px 50px rgba(0,0,0,.5), 0px 10px 20px rgba(0,0,0,.2);
   transition: width .2s;
+  position: relative;
 }
 
 .ArmRest {
@@ -153,6 +176,8 @@ $mediaMinWidth: 480px;
   background-color: #916e43;
   padding: 3em;
   background-image:url('./wood.jpg');
+  border-radius: 25em;
+  box-shadow: 0px 20px 50px rgba(0,0,0,.5), 0px 10px 20px rgba(0,0,0,.3);
 }
 
 .TableTop {
@@ -218,11 +243,15 @@ $mediaMinWidth: 480px;
 
 .Player.Top {
   top: 0;
+  // top: -40px;
+  top: -10%;
   // transform: translateY(-35%);
 }
 
 .Player.Bottom {
   bottom: 0;
+  // bottom: -40px;
+  bottom: -10%;
   // transform: translateY(35%);
 }
 
@@ -290,14 +319,16 @@ $mediaMinWidth: 480px;
 
 
 .TopWonTurn .CardZone {
-  top: 0 !important;
+  // top: -40px !important;
+  top: -20% !important;
   bottom: auto !important;
 
 }
 
 .BottomWonTurn .CardZone {
   top: auto !important;
-  bottom: 0 !important;
+  // bottom: -40px !important;
+  bottom: -10%!important;
 }
 
 .BottomWonTurn.CardZone, .TopWonTurn.CardZone {
@@ -335,7 +366,7 @@ $mediaMinWidth: 480px;
 
 // .CardFlip.Bottom:hover {
 .Bottom .CardFlip.Flipping {
-  transform: translate(10vw, -30vh) rotateX(180deg);
+  transform: translate(10vw, -20vh) rotateX(180deg);
   bottom: 0;
 }
 
@@ -352,18 +383,18 @@ $mediaMinWidth: 480px;
 }
 
 .CardZone.Bottom {
-  transform: translate(10vw, -30vh);
+  transform: translate(10vw, -20vh);
   bottom: 0;
 }
 
 // .CardFlip.Top:hover {
 .Top .Flipping {
-  transform: translate(-10vw, 30vh) rotateX(-180deg);
+  transform: translate(-10vw, 20vh) rotateX(-180deg);
   top: 0; 
 }
 
 .CardZone.Top {
-  transform: translate(-10vw, 30vh);
+  transform: translate(-10vw, 20vh);
   top: 0;
 }
 
@@ -424,9 +455,7 @@ $mediaMinWidth: 480px;
 
 .LoginForm {
   padding: 1em;
-  background-color: rgba(0,0,0,.9);
   background-color: rgba(20, 20, 20, 0.97);
-  background-color: rgba(40, 40, 40, 0.99);
   box-shadow: 0 2px 5px rgba(0,0,0,.5);
   display: flex;
   flex-direction: column;
@@ -452,7 +481,29 @@ $mediaMinWidth: 480px;
   }
 }
 
+.Leaderboard {
+  // background-color: #FFF;
+  padding: 20px 40px;
 
+  h1 {
+    font-size: 48px;
+    background-color: #FFF;
+    text-align: center;
+    padding: 8px;
+  }
+}
+
+.LeaderboardTable {
+  font-size: 32px;
+  // border: 2px solid 
+  margin: auto;
+
+  th, td {
+    padding: 10px 24px;
+    margin: 8px;
+    background-color: #FFF;
+  }
+}
 
 
 

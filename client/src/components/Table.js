@@ -1,4 +1,6 @@
 import { useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
+
 import PlayerSide from './PlayerSide';
 
 const Table = () => {
@@ -163,8 +165,6 @@ const Table = () => {
 
     return (
         <>
-            <button className="NewGame" onClick={dealHands}>Deal Cards</button>
-
             <div className="Table">
                 <div className="ArmRest">
                     <div className={`TableTop ${wonTurn}`}>
@@ -197,6 +197,11 @@ const Table = () => {
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <div className="GameButtons">
+                <button className="NewGame" onClick={dealHands}>Deal Cards</button>
+                <Link className="LeaderboardButton" to="/Leaderboard">Leaderboards</Link>
             </div>
         </>
     );
