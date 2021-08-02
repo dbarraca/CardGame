@@ -3,24 +3,24 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const config =  require('config');
 const jwt = require('jsonwebtoken');
-const auth = require('../middleware/auth');
+const auth = require('../../middleware/auth');
 
 // Site Model
-const User = require('../models/user');
+const User = require('../../models/user');
 
 // @route   Post /auth
 // @ desc   Authenticate the user
 // @ access Public
 router.post('/', async (req, res) => {
     try {
-        const { email, password } = req.body;
+        const { username, password } = req.body;
 
-        if (!email || !password) {
+        if (!username || !password) {
             return res.status(400).json({msg: "Please enter all fields"});
         }
 
         // Check for esisting user
-        const existingUser = await User.findOne({ email });
+        const existingUser = await User.findOne({ username });
 
         if (!existingUser) {
             return res.status(400).json({msg: "User does not exist"});
@@ -42,8 +42,7 @@ router.post('/', async (req, res) => {
         return res.status(200).json({
             token,
             id: existingUser.id,
-            name: existingUser.name,
-            email: existingUser.email
+            username: existingUser.username
         });
     }
     catch (e) {
@@ -56,9 +55,8 @@ router.post('/', async (req, res) => {
 // @ access Private
 router.get('/user', auth, async (req, res) => {
     const user = await User.findById(req.user.id)
-        .select('-password');
-
-    console.log(user);
+        .select('-password').
+        then(user => res.json(user));
 
     return res.status(200).json(user);
 });

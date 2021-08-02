@@ -3,17 +3,17 @@ const Schema = mongoose.Schema;
 
 // create User Schema
 const UserSchema = new Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    email: {
+    username: {
         type: String,
         required: true
     },
     password: {
         type: String,
         required: true
+    },
+    aiGamesWon: {
+        type: Number,
+        default: 0
     },
     register_date: {
         type: Date,

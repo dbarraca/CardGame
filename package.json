@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/dbarraca/CardGame#readme",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "concurrently": "^6.2.0"
   }
 }

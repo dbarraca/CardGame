@@ -14,7 +14,7 @@ const PlayerSide = ({ waiting, player, drawCard }) => {
     }
 
     const handleDraw = () => {
-        if (waiting !== player.id) {
+        if (player.drawnCard < 0) {
             flipCard();
             drawCard(player.id);
         }

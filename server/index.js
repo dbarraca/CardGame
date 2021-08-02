@@ -31,7 +31,6 @@ else {
     .catch(err => console.log(err));
 }
 
-
 const app  = express();
 app.use(cors());
 app.use(express.json());
@@ -44,10 +43,10 @@ app.use((req, res, next) => {
 });
 
 // Users Routes
-app.use('/users', require('./routes/users'));
+app.use('/users', require('./routes/api/users'));
 
 // Auth Routes
-app.use('/auth', require('./routes/auth'));
+app.use('/auth', require('./routes/api/auth'));
 
 // If in production, then use static frontend build files.
 if (process.env.NODE_ENV === 'production') {    
