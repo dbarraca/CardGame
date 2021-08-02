@@ -22,6 +22,7 @@ $mediaMinWidth: 480px;
   background-color: #444;
   background-image: url('./classy_fabric.png');
   transition: font-size .3s;
+  font-family: 'Roboto Slab', serif;
 }
 
 .StartMsg {
@@ -228,14 +229,13 @@ $mediaMinWidth: 480px;
 .PlayedCount {
   text-align: center;
   padding: 4px 8px;
-  // background-color: #FFF;
   color: #d12d36;
   border: 2px solid #d12d36;
   text-shadow: 1px 1px 1px rgba(0,0,0,.8);
   border-radius: 2px;
   font-size: 1.5em;
-  // background-color: rgba(0,0,0,.6);
   background-color: rgb(255,255,255);
+  z-index: 20;
 }
 
 .Player {
@@ -404,6 +404,7 @@ $mediaMinWidth: 480px;
 
   h1 {
     color:#d12d36;
+    text-align: center;
     // text-shadow:  2px -3px 0 rgba(255,255,255,1), 0 3px 5px rgba(0,0,0,.5);
     background-color: rgba(255,255,255,.98);
     padding: 0 10px;

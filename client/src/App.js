@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import Table from './components/Table';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
+import Leaderboard from './components/Leaderboard';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 
@@ -31,6 +32,10 @@ function App() {
 
           <Route path="/Game">
             <Table />
+          </Route>
+
+          <Route path="/Leaderboard">
+            <Leaderboard />
           </Route>
 
         </div>
