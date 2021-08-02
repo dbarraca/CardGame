@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 const SignUp = () => {
     return (
         <div className="Login">
-            <h1>Join the War</h1>
-
             <div className="LoginForm">
+                <h1>Join the War</h1>
+
                 <h3>Sign Up</h3>
 
                 <input type="email" placeholder="Username"/>

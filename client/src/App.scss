@@ -397,33 +397,41 @@ $mediaMinWidth: 480px;
 .Login {
   font-size: 2rem;
   background-image: url('./CardsScattedUp.jpg');
-  padding: 122px 50px;
+  padding: 100px;
   background-size: cover;
   border-radius: 6px;
   box-shadow: 0 0 20px rgba(0,0,0,.3);
+  text-align: center;
+  color: #FFF;
+  border: 2px solid #333;
 
   h1 {
-    color:#d12d36;
-    text-align: center;
+    letter-spacing: 3px;
+    text-shadow: -3px 0 #d12d36, 0 3px #d12d36, 3px 0 #d12d36, 0 -3px #d12d36, 
+    -3px -3px #d12d36, 3px 3px #d12d36, 3px -3px #d12d36, 3px -3px #d12d36;
+  
+    // color:#d12d36;
     // text-shadow:  2px -3px 0 rgba(255,255,255,1), 0 3px 5px rgba(0,0,0,.5);
-    background-color: rgba(255,255,255,.98);
-    padding: 0 10px;
-    border-radius: 2px;
-    box-shadow: 0 0 5px rgba(0,0,0,.5);
-    margin-bottom: 1em;
+    // background-color: rgba(255,255,255,.98);
+    // padding: 0 10px;
+    // border-radius: 2px;
+    // box-shadow: 0 0 5px rgba(0,0,0,.5);
+    margin-bottom: 0;
     margin-top: 0;
     font-weight: 600;
-    // text-decoration: underline;
   }
 }
 
 .LoginForm {
   padding: 1em;
-  background-color: rgba(255,255,255,.98);
+  background-color: rgba(0,0,0,.9);
+  background-color: rgba(20, 20, 20, 0.97);
+  background-color: rgba(40, 40, 40, 0.99);
   box-shadow: 0 2px 5px rgba(0,0,0,.5);
   display: flex;
   flex-direction: column;
   border-radius: 8px;
+  border: 1px solid #BBB;
 
   h2 {
     margin: 0 0 10px 0;

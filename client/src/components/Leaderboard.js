@@ -1,6 +1,9 @@
 const Leaderboard = () => {
     return (
-        <h1>Leaderboard</h1>
+        <div class="Leaderboard">
+            <h1>Leaderboard</h1>
+
+        </div>
     )
 }
 
