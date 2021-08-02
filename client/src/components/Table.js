@@ -3,13 +3,9 @@ import PlayerSide from './PlayerSide';
 
 const Table = () => {
     const [active, setActive]  = useState(false);
-
     const [winner, setWinner] = useState();
-
     const [wonTurn, setWonTurn] = useState("");
-
-    const [waiting, setWaiting] = useState(-1);
-    const refWaiting = useRef(waiting);
+    const [inWar, setInWar] = useState("");
 
     const [players, setPlayers] = useState([
         {
@@ -29,15 +25,8 @@ const Table = () => {
     ]);
     const refPlayers = useRef(players);
 
-
     const [playedCards, setPlayedCards] = useState([]);
     const refPlayedCards = useRef(playedCards);
-    
-     // Keeps the state and ref equal
-    function updateWaiting(newState) {
-        refWaiting.current = newState;
-        setWaiting(newState);
-    }
 
     function updatePlayedCards(newState) {
         refPlayedCards.current = newState;
@@ -59,8 +48,6 @@ const Table = () => {
 
         setWinner("");
         setActive(true);
-
-        updateWaiting(-1);
 
         for (let cardCount = 0; cardCount < 52; cardCount++) {
             do{
@@ -89,49 +76,39 @@ const Table = () => {
         const player1 = refPlayers.current[0];
         const player2 = refPlayers.current[1];
 
+        setInWar(rank1 === rank2);
+
         // console.log(rank1, rank2);
         // console.log(played);
 
         if(rank1 === rank2) {
             // setInWar(true);
             
-            // console.log("War");
             drawCard(players[0].id);
-            // drawCard(players[0].id);
-            // drawCard(players[0].id);
             drawCard(players[1].id);
-            // drawCard(players[1].id);
-            // drawCard(players[1].id);
 
             updatePlayers(refPlayers.current.map((curPlayer) => {
                 return( { ...curPlayer, drawnCard: -1} )
             }));
 
-            updateWaiting(-1);
-
         } else {
             // setInWar(false);
 
             if (rank1 > rank2) {
-                // console.log("player 1 greater rank");
                 updatePlayers([ { ...player1, hand: [ ...player1.hand, ...played ], drawnCard: -1 }, { ...player2, drawnCard: -1} ]);
                 setWonTurn("TopWonTurn");
             }
             else {
-                // console.log("player 2 greater rank");
                 updatePlayers([{ ...player1, drawnCard: -1 } , { ...player2, hand: [ ...player2.hand, ...played ], drawnCard: -1 }]) ;
                 setWonTurn("BottomWonTurn");
             }
             
-            // setWonTurn(``);
             setTimeout(() => {
                 setWonTurn("");
             }, 500);
 
             updatePlayedCards([]);
         }
-
-        updateWaiting(-1);
     }
 
     const drawCard = (drawingPlayerID) => {
@@ -140,7 +117,6 @@ const Table = () => {
         if(!winner && drawingPlayer.hand.length <= 0) {
             setWinner(refPlayers.current.find(player => player.id !== drawingPlayerID).title);
             setActive(false);
-            // console.log(`${winner} Won`);
 
            return -1;
         }
@@ -169,8 +145,6 @@ const Table = () => {
                 )
             }));
 
-            // console.log("Drawn Card", card);
-
             return card;
         }
     }
@@ -178,10 +152,7 @@ const Table = () => {
     const normalDraw = (drawingPlayerID) => {
         let card = drawCard(drawingPlayerID);
 
-        if (refWaiting.current < 0) {
-            updateWaiting(drawingPlayerID);
-        }
-        else {
+        if (refPlayers.current[0].drawnCard >= 0 && refPlayers.current[1].drawnCard >= 0) {
             setTimeout(() => {
                 compareCards();
             }, 900);
@@ -198,8 +169,6 @@ const Table = () => {
                 <div className="ArmRest">
                     <div className={`TableTop ${wonTurn}`}>
                         <div className="TableOverlay">
-                            {!active && <h1 className="StartMsg">Deal cards to begin a <br/>Game of War</h1>}
-
                             {
                                 winner ?
 
@@ -212,14 +181,19 @@ const Table = () => {
                                 active &&
                                 players.map( (player, index) => {
                                     return(
-                                        <PlayerSide waiting={refWaiting.current} player={player} key={index} drawCard={normalDraw} /> 
+                                        <PlayerSide player={player} key={index} drawCard={normalDraw} inWar={inWar}/> 
                                     )
                                 })
                             }
                             {
-                                refPlayedCards && refPlayedCards.current && refPlayedCards.current.length > 0 &&
-                                <div className="PlayedCount">{refPlayedCards.current.length} Card{refPlayedCards.current.length > 1 ? "s":""}</div>
+                                active && refPlayedCards && refPlayedCards.current && refPlayedCards.current.length > 0 &&
+                                <div className="PlayedCount">
+                                    <div className="WarMsg">{inWar && "WAR"}</div>
+                                    <div>{refPlayedCards.current.length} Card{refPlayedCards.current.length > 1 ? "s":""}</div>
+                                </div>
                             }
+
+                            {!active && <h1 className="StartMsg">Deal cards to begin a <br/>Game of War</h1>}
                         </div>
                     </div>
                 </div>

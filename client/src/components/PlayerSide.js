@@ -2,7 +2,7 @@ import { useState } from 'react';
 import Player from './Player';
 import CardZone from './CardZone';
 
-const PlayerSide = ({ waiting, player, drawCard }) => {
+const PlayerSide = ({ waiting, player, drawCard, inWar }) => {
     const [flipping, setFlipping] = useState(false);
 
     const flipCard = () => {
@@ -22,7 +22,7 @@ const PlayerSide = ({ waiting, player, drawCard }) => {
 
     return (
         <>
-            <CardZone position={player.position} drawnCard={player.drawnCard}/>
+            <CardZone position={player.position} drawnCard={player.drawnCard} inWar={inWar}/>
 
             <Player player={player} handleDraw={handleDraw} flipping={flipping}/>
         </>

@@ -199,6 +199,7 @@ $mediaMinWidth: 480px;
   // min-height: 100vh;
   // min-height:60vh;
   min-height: 600px;
+  flex-direction: column;
 }
 
 .CardZones {
@@ -225,6 +226,7 @@ $mediaMinWidth: 480px;
 }
 
 .PlayedCount {
+  text-align: center;
   padding: 4px 8px;
   // background-color: #FFF;
   color: #d12d36;
@@ -238,6 +240,11 @@ $mediaMinWidth: 480px;
 
 .Player {
   position: absolute;
+}
+
+.WarMsg {
+  font-weight: bold;
+  font-size: 32px;
 }
 
 .UpsideDown {
