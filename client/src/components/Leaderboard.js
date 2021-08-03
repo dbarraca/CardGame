@@ -12,7 +12,7 @@ const Leaderboard = () => {
     }, [dispatch]);
 
     const users = useSelector(state => state.users.items);
-
+ 
     const userItems = users && users.map(user => (
         <tr key={user._id}>
             <td>{user.username}</td>
