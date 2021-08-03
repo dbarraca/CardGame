@@ -2,7 +2,7 @@ import { fetchUsers } from '../actions/userActions';
 
 import { useEffect } from 'react';
 import {  useDispatch, useSelector } from 'react-redux';
-
+import { Link } from 'react-router-dom';
 
 const Leaderboard = () => {
     const dispatch = useDispatch();
@@ -31,6 +31,10 @@ const Leaderboard = () => {
                 </tr>
                 {userItems}
             </table>
+
+            <div className="GameButtons">
+                <Link className="NewGame" to="/">Back to Table</Link>
+            </div>
         </div>
     )
 }
