@@ -12,7 +12,7 @@ const Table = () => {
     const [players, setPlayers] = useState([
         {
             id: 1,
-            title: "Player 2",
+            title: "Computer",
             position: "Top",
             hand: [],
             drawnCard: -1
@@ -163,10 +163,15 @@ const Table = () => {
         return card;
     }
 
+    const bothDraw = () => {
+        normalDraw(refPlayers.current[0].id);
+        normalDraw(refPlayers.current[1].id);
+    }
+
     return (
         <>
             <div className="GameButtons">
-                <Link className="LoginButton" to="/Login">Log In</Link>
+                <Link className="LoginButton" to="/Login">Log In</Link> 
                 <Link className="SignUpButton" to="/SignUp">Sign Up</Link>
             </div>
 
@@ -186,7 +191,7 @@ const Table = () => {
                                 active &&
                                 players.map( (player, index) => {
                                     return(
-                                        <PlayerSide player={player} key={index} drawCard={normalDraw} inWar={inWar}/> 
+                                        <PlayerSide player={player} key={index} drawCard={bothDraw} inWar={inWar}/> 
                                     )
                                 })
                             }

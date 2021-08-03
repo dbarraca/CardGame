@@ -327,7 +327,7 @@ $mediaMinWidth: 480px;
 
 .TopWonTurn .CardZone {
   // top: -40px !important;
-  top: -20% !important;
+  top: -10% !important;
   bottom: auto !important;
 
 }
@@ -373,7 +373,7 @@ $mediaMinWidth: 480px;
 
 // .CardFlip.Bottom:hover {
 .Bottom .CardFlip.Flipping {
-  transform: translate(10vw, -20vh) rotateX(180deg);
+  transform: translate(10vw, -18vh) rotateX(180deg);
   bottom: 0;
 }
 
@@ -390,18 +390,18 @@ $mediaMinWidth: 480px;
 }
 
 .CardZone.Bottom {
-  transform: translate(10vw, -20vh);
+  transform: translate(10vw, -18vh);
   bottom: 0;
 }
 
 // .CardFlip.Top:hover {
 .Top .Flipping {
-  transform: translate(-10vw, 20vh) rotateX(-180deg);
+  transform: translate(-10vw, 18vh) rotateX(-180deg);
   top: 0; 
 }
 
 .CardZone.Top {
-  transform: translate(-10vw, 20vh);
+  transform: translate(-10vw, 18vh);
   top: 0;
 }
 
