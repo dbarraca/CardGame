@@ -165,6 +165,11 @@ const Table = () => {
 
     return (
         <>
+            <div className="GameButtons">
+                <Link className="LoginButton" to="/Login">Log In</Link>
+                <Link className="SignUpButton" to="/SignUp">Sign Up</Link>
+            </div>
+
             <div className="Table">
                 <div className="ArmRest">
                     <div className={`TableTop ${wonTurn}`}>

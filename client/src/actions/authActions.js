@@ -15,18 +15,50 @@ import {
 
 // Check token and load user
 export const loadUser = () => (dispatch, getState) => {
+    console.log("load user");
+    
     // User loading
     dispatch({ type: USER_LOADING });
 
-    axios.get('/api/auth/user', tokenConfig(getState))
+    axios.get('/auth/user', tokenConfig(getState))
         .then(res => dispatch({
             type: USER_LOADED,
             payload: res.data
         }))
         .catch(err => {
-            dispatch(returnErrors(err.response.data, err.repsonse.status));
+            dispatch(returnErrors(err.response.data, err.response.status));
 
             dispatch({ type: AUTH_ERROR });
+        });
+}
+
+//Register User
+export const register = ({ username, password }) => dispatch => {
+
+    // Header
+    const config = {
+        headers: {
+            "Content-type": "application/json"
+        }
+    }
+
+    // Request body
+    const body = JSON.stringify({username, password});
+
+    console.log(body)
+
+    axios.post('/users', body, config)
+    // axios.post('/auth/user', body, config)
+        .then(res => dispatch({
+            type: REGISTER_SUCCESS,
+            payload: res.data
+        }))
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status, 'REGISTER_FAIL'));
+
+            dispatch({
+                type: REGISTER_FAIL
+            })
         });
 }
 
@@ -49,3 +81,4 @@ export const tokenConfig = getState => {
 
     return config
 }
+

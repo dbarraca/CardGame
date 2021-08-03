@@ -63,10 +63,16 @@ $mediaMinWidth: 480px;
   // bottom: 10px;
   width: 100%;
   justify-content: flex-end;
-  // padding-top: 0em;
+  padding-top: 1em;
 }
 
-.NewGame, .LeaderboardButton {
+
+.NewGame, .LoginButton  {
+  background-color:#d12d36;
+  color:#FFF;
+}
+
+.LoginButton, .SignUpButton, .NewGame, .LeaderboardButton {
   // position: fixed;
   // left: 1em;
   // top: 1em;
@@ -75,20 +81,21 @@ $mediaMinWidth: 480px;
   padding: .25em;
   box-shadow: 1px 1px 9px 2px rgba(0,0,0,.35);
   border-radius: 4px;
-  background-color:#d12d36;
-  color:#FFF;
+
   transition: box-shadow .2s;
   margin-right: 1em;
   margin-bottom: 1em;
+  text-decoration: none;;
 }
 
-.NewGame:active {
+.LoginButton:active, .NewGame:active {
   box-shadow: none;
   color:#d12d36;
   background-color:#FFF;
 }
 
-.LeaderboardButton {
+
+.SignUpButton,.LeaderboardButton {
   text-decoration: none;
   color:#d12d36;
   background-color:#FFF;
