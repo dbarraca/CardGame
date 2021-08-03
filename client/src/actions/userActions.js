@@ -12,13 +12,13 @@ export const fetchUsers = () => async dispatch => {
         } 
     });*/
 
-    // const config = {
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    // }
+    const config = {
+        headers: {
+            'Content-Type': 'application/json'
+        },
+    }
 
-    const { data }  = await axios.get('/users/ai');
+    const { data }  = await axios.get('/users/ai', config);
 
     const users = await data;
 
