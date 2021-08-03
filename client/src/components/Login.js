@@ -4,10 +4,11 @@ const Login = () => {
     return (
         <div className="Login">
             <div className="LoginForm">
-                <h1>War Card Game</h1>
+                <h1>War</h1>
+                <h2>Card Game</h2>
 
                 <h3>Login</h3>
-                <input type="email" placeholder="Username"/>
+                <input type="text" placeholder="Username"/>
                 <input type="Password" placeholder="Password"/>
                 <button>Login</button>
 

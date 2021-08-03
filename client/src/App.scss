@@ -436,7 +436,7 @@ $mediaMinWidth: 480px;
   color: #FFF;
   border: 2px solid #333;
 
-  h1 {
+  h1, h2 {
     letter-spacing: 3px;
     text-shadow: -3px 0 #d12d36, 0 3px #d12d36, 3px 0 #d12d36, 0 -3px #d12d36, 
     -3px -3px #d12d36, 3px 3px #d12d36, 3px -3px #d12d36, 3px -3px #d12d36;
@@ -451,6 +451,10 @@ $mediaMinWidth: 480px;
     margin-top: 0;
     font-weight: 600;
   }
+
+  h2 {
+    padding: 0 1em;
+  } 
 }
 
 .LoginForm {
@@ -462,8 +466,8 @@ $mediaMinWidth: 480px;
   border-radius: 8px;
   border: 1px solid #BBB;
 
-  h2 {
-    margin: 0 0 10px 0;
+  h3 {
+    margin: 1em 0;
     text-align: center;
     // font-weight: 600;
     font-weight: normal;
