@@ -170,10 +170,10 @@ const Table = () => {
 
     return (
         <>
-            <div className="GameButtons">
+            {/* <div className="GameButtons">
                 <Link className="LoginButton" to="/Login">Log In</Link> 
                 <Link className="SignUpButton" to="/SignUp">Sign Up</Link>
-            </div>
+            </div> */}
 
             <div className="Table">
                 <div className="ArmRest">
@@ -211,7 +211,7 @@ const Table = () => {
 
             <div className="GameButtons">
                 <button className="NewGame" onClick={dealHands}>Deal Cards</button>
-                <Link className="LeaderboardButton" to="/Leaderboard">Leaderboards</Link>
+                {/* <Link className="LeaderboardButton" to="/Leaderboard">Leaderboards</Link> */}
             </div>
         </>
     );

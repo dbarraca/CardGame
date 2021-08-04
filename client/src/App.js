@@ -1,12 +1,11 @@
 import './App.scss';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 
 import Game from './components/Game';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import { Provider, useDispatch } from 'react-redux'; 
-import store from './store';
-import { loadUser } from './actions/authActions';
+// import store from './store';
+// import { loadUser } from './actions/authActions';
 
 function App() {
 
@@ -20,11 +19,11 @@ function App() {
   // }, [] );
 
   return (
-    <Provider store={store}>
+    // <Provider store={store}>
         <div className="App">
           <Game />
         </div>
-    </Provider>
+    // </Provider>
   );
 }
 
