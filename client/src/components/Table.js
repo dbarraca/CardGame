@@ -87,6 +87,10 @@ const Table = () => {
             // setInWar(true);
             
             drawCard(players[0].id);
+            drawCard(players[0].id);
+            drawCard(players[0].id);
+            drawCard(players[1].id);
+            drawCard(players[1].id);
             drawCard(players[1].id);
 
             updatePlayers(refPlayers.current.map((curPlayer) => {
