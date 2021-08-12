@@ -7,8 +7,7 @@ import Leaderboard from './Leaderboard';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import { loadUser } from '../actions/authActions';
 
-
-const Game = () => {
+const Routing = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -38,4 +37,4 @@ const Game = () => {
     )
 }
 
-export default Game;
+export default Routing;
