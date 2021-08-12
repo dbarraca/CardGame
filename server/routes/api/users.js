@@ -39,25 +39,21 @@ router.post('/', async (req, res) => {
 
         newUser.password = hash;
         newUser.save();
-        
+
         if (process.env.NODE_ENV === 'production') {
-            const token = await jwt.sign(
-                { id: newUser.id },
-                process.env.jwtSecret,
-                { expiresIn: 3600 }
-            )
-            .then(() => console.log('User Authencicated'))
-            .catch(err => console.log(err));
+            let JWTSecret = process.env.jwtSecret;
         }
         else {
-            const token = await jwt.sign(
-                { id: newUser.id },
-                config.get('jwtSecret'),
-                { expiresIn: 3600 }
-            )
-            .then(() => console.log('User Authencicated'))
-            .catch(err => console.log(err));
+            let JWTSecret = config.get('jwtSecret');
         }
+
+        const token = await jwt.sign(
+            { id: newUser.id },
+            JWTSecret,
+            { expiresIn: 3600 }
+        )
+        .then(() => console.log('User Authencicated'))
+        .catch(err => console.log(err));
 
         return res.status(200).json({newUser: {
             token,
