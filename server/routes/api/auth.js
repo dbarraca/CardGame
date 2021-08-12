@@ -33,9 +33,16 @@ router.post('/', async (req, res) => {
             return res.status(400).json({msg: "Invalid Credentials"});
         }
 
+        if (process.env.NODE_ENV === 'production') {
+            var JWTSecret = process.env.jwtSecret;
+        }
+        else {
+            var JWTSecret = config.get('jwtSecret');
+        }
+
         const token = await jwt.sign(
             { id: existingUser.id },
-            config.get('jwtSecret'),
+            JWTSecret,
             { expiresIn: 3600 }
         );
 
