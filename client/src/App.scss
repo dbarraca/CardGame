@@ -24,7 +24,6 @@ $mediaMinWidth: 480px;
   background-image: url('./classy_fabric.png');
   transition: font-size .3s;
   font-family: 'Roboto Slab', serif;
-  padding-top: 1em;
 }
 
 .StartMsg {
@@ -56,15 +55,34 @@ $mediaMinWidth: 480px;
   color: #d12d36;
 }
 
-.GameButtons {
+.AccountMenu, .GameButtons {
   display: flex;
   flex-direction: row;
-  // position: absolute;
-  // right: 10px;
-  // bottom: 10px;
   width: 100%;
   justify-content: flex-end;
-  padding-top: 1em;
+  align-items: center;
+  // padding-top: 1em;
+  margin-right: 1rem;
+}
+
+.AccountMenu {
+  padding-top: 1rem;
+}
+
+.UserHello {
+  color:#FFF;
+  font-size: 1.5rem;
+  text-shadow: 2px 2px rgba(0,0,0,1), 4px 4px rgba(0,0,0,.5);
+}
+
+.UserWins {
+  color: #FFF;
+  display: block;
+  font-size: 16px;
+}
+
+.GameButtons {
+  padding-bottom: 1em;
 }
 
 
@@ -73,20 +91,16 @@ $mediaMinWidth: 480px;
   color:#FFF;
 }
 
-.LoginButton, .SignUpButton, .NewGame, .LeaderboardButton {
-  // position: fixed;
-  // left: 1em;
-  // top: 1em;
-  font-size: 2em;
+.LoginButton, .SignUpButton, .NewGame, .LeaderboardButton, .LogoutButton {
+  font-size: 1.5rem;
   border: none;
   padding: .25em;
   box-shadow: 1px 1px 9px 2px rgba(0,0,0,.35);
   border-radius: 4px;
-
   transition: box-shadow .2s;
-  margin-right: 1em;
-  margin-bottom: 1em;
-  text-decoration: none;;
+  margin-left: 1em;
+  text-decoration: none;
+  font-family: 'Roboto Slab', serif;
 }
 
 .LoginButton:active, .NewGame:active {
@@ -96,7 +110,7 @@ $mediaMinWidth: 480px;
 }
 
 
-.SignUpButton,.LeaderboardButton {
+.SignUpButton,.LeaderboardButton, .LogoutButton {
   text-decoration: none;
   color:#d12d36;
   background-color:#FFF;
@@ -195,6 +209,7 @@ $mediaMinWidth: 480px;
   background-repeat: repeat;
   min-height: 100vh;
   min-height: 600px;
+  // min-height: 550px;
   overflow: hidden;
   border-radius: 40em;
   box-shadow:
@@ -233,6 +248,7 @@ $mediaMinWidth: 480px;
   // min-height: 100vh;
   // min-height:60vh;
   min-height: 600px;
+  // min-height: 550px;
   flex-direction: column;
 }
 
@@ -257,11 +273,22 @@ $mediaMinWidth: 480px;
 }
 
 .Player.Bottom {
-  bottom: 0;
+  // bottom: 0;
   // bottom: -40px;
   bottom: -10%;
   // transform: translateY(35%);
 }
+/*
+.Player.Right {
+  top: auto;
+  bottom: auto;
+  right: -10%
+}
+
+.Player.Right .Score {
+  transform: translateX(-87%) rotate(90deg);
+}
+*/
 
 .PlayedCount {
   text-align: center;
@@ -483,14 +510,45 @@ $mediaMinWidth: 480px;
   }
 
   input, button{
-    margin: 10px;
+    // margin: 10px;
     font-size: 18px;
+  }
+
+  input {
+    padding: 8px 10px;
   }
 
   p {
     font-size: 16px;
     text-align: center;
   }
+
+  label {
+    font-size: 12px;
+    text-align: left;
+    font-weight: bold;
+    margin-top: 12px;
+    margin-bottom: 2px;
+  }
+
+  button {
+    margin-top: 18px;
+  }
+}
+
+.ErrorMsg {
+  // color: red;
+  // border: 2px solid red;
+  // background-color: rgb(255,230,230);
+  // color: #FFF;
+  // background-color: red;
+  background-color: #fdf6f6;
+  border: 1px solid #de7575;
+  color: #c20707;
+  padding: 8px 10px;
+  // margin: .5em;
+  font-size: 18px;
+  border-radius: 2px;
 }
 
 .Leaderboard {
@@ -498,15 +556,16 @@ $mediaMinWidth: 480px;
   padding: 20px 40px;
 
   h1 {
-    font-size: 48px;
-    background-color: #FFF;
+    // font-size: 48px;
+    color: #FFF;
     text-align: center;
     padding: 8px;
+    text-shadow: 2px 2px rgba(0,0,0,1), 4px 4px rgba(0,0,0,.5);
   }
 }
 
 .LeaderboardTable {
-  font-size: 32px;
+  // font-size: 32px;
   // border: 2px solid 
   margin: auto;
 

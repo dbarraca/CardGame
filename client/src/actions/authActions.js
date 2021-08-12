@@ -14,9 +14,7 @@ import {
 } from './types.js';
 
 // Check token and load user
-export const loadUser = () => (dispatch, getState) => {
-    console.log("load user");
-    
+export const loadUser = () => (dispatch, getState) => {    
     // User loading
     dispatch({ type: USER_LOADING });
 
@@ -34,7 +32,6 @@ export const loadUser = () => (dispatch, getState) => {
 
 //Register User
 export const register = ({ username, password }) => dispatch => {
-
     // Header
     const config = {
         headers: {
@@ -44,8 +41,6 @@ export const register = ({ username, password }) => dispatch => {
 
     // Request body
     const body = JSON.stringify({username, password});
-
-    console.log(body)
 
     axios.post('/users', body, config)
     // axios.post('/auth/user', body, config)
@@ -60,6 +55,40 @@ export const register = ({ username, password }) => dispatch => {
                 type: REGISTER_FAIL
             })
         });
+}
+
+// Login User
+export const login = ({ username, password}) => dispatch => {
+   // Header
+   const config = {
+        headers: {
+            "Content-type": "application/json"
+        }
+    }
+
+    // Request body
+    const body = JSON.stringify({username, password});
+
+    axios.post('/auth', body, config)
+        .then(res => dispatch({
+            type: LOGIN_SUCCESS,
+            payload: res.data
+        }))
+        .catch(err => {
+            dispatch(returnErrors(err.response.data, err.response.status, 'LOGIN_FAIL'));
+
+            dispatch({
+                type: LOGIN_FAIL
+            })
+        });
+}
+
+
+// Logout User
+export const logout = () => {
+    return {
+        type: LOGOUT_SUCCESS
+    };
 }
 
 // Set Up config/header in token
@@ -81,4 +110,3 @@ export const tokenConfig = getState => {
 
     return config
 }
-

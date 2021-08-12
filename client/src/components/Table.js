@@ -1,7 +1,8 @@
 import { useState, useRef } from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import PlayerSide from './PlayerSide';
+import AccountMenu from './AccountMenu';
 
 const Table = () => {
     const [active, setActive]  = useState(false);
@@ -24,6 +25,14 @@ const Table = () => {
             hand: [],
             drawnCard: -1
         }
+        /*,
+        {
+            id: 3,
+            title: "Player 2",
+            position: "Right",
+            hand: [],
+            drawnCard: -1
+        }*/
     ]);
     const refPlayers = useRef(players);
 
@@ -61,7 +70,7 @@ const Table = () => {
 
         updatePlayers([ 
             { ...players[0], hand: dealtCards.slice(0,26), drawnCard: -1 } ,
-            { ...players[1], hand: dealtCards.slice(26), drawnCard: -1 } 
+            { ...players[1], hand: dealtCards.slice(26), drawnCard: -1 },
         ]);
 
         updatePlayedCards([]);
@@ -174,10 +183,7 @@ const Table = () => {
 
     return (
         <>
-            {/* <div className="GameButtons">
-                <Link className="LoginButton" to="/Login">Log In</Link> 
-                <Link className="SignUpButton" to="/SignUp">Sign Up</Link>
-            </div> */}
+            <AccountMenu />
 
             <div className="Table">
                 <div className="ArmRest">
@@ -194,6 +200,8 @@ const Table = () => {
                                 
                                 active &&
                                 players.map( (player, index) => {
+                                    // console.log("playerID", player.id);
+
                                     return(
                                         <PlayerSide player={player} key={index} drawCard={bothDraw} inWar={inWar}/> 
                                     )
@@ -215,7 +223,7 @@ const Table = () => {
 
             <div className="GameButtons">
                 <button className="NewGame" onClick={dealHands}>Deal Cards</button>
-                {/* <Link className="LeaderboardButton" to="/Leaderboard">Leaderboards</Link> */}
+                <Link className="LeaderboardButton" to="/Leaderboard">Leaderboards</Link>
             </div>
         </>
     );

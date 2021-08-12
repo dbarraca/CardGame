@@ -12,7 +12,6 @@ const Game = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-      console.log("In app use effect");
       dispatch(loadUser());
   
     }, [dispatch, loadUser] );
@@ -21,6 +20,7 @@ const Game = () => {
         <Router>
             <Route path="/Login" >
                 <Login />
+                 {/* {loggedIn ? <Redirect to="/" /> : <Login /> */}
             </Route>
             
             <Route path="/SignUp" >
