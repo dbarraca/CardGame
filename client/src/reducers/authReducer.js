@@ -10,9 +10,7 @@ AUTH_ERROR
 } from '../actions/types.js';
 
 const initialState = {
-    // how does our Local storage know about token, I think Brad forgot to actually send it in reducer
     token: localStorage.getItem('token'),
-    // token: null,
     isAuthenticated: null,
     isLoading: false,
     user: null

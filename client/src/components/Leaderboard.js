@@ -1,7 +1,7 @@
 import { fetchUsers } from '../actions/userActions';
 
 import { useEffect } from 'react';
-import {  useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const Leaderboard = () => {
@@ -13,8 +13,8 @@ const Leaderboard = () => {
 
     const users = useSelector(state => state.users.items);
  
-    const userItems = users && users.map(user => (
-        <tr key={user._id}>
+    const userItems = users && users.map((user, index) => (
+        <tr key={index}>
             <td>{user.username}</td>
             <td>{user.aiGamesWon}</td>
         </tr>
@@ -25,11 +25,13 @@ const Leaderboard = () => {
             <h1>War Card Game Leaderboards</h1>
 
             <table className="LeaderboardTable">
-                <tr>
-                    <th>Username</th>
-                    <th>Wins against computer</th>
-                </tr>
-                {userItems}
+                <tbody>
+                    <tr>
+                        <th>Username</th>
+                        <th>Wins against AI</th>
+                    </tr>
+                    {userItems}
+                </tbody>
             </table>
 
             <div className="GameButtons">

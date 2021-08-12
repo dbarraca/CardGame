@@ -1,15 +1,16 @@
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link, useHistory } from 'react-router-dom';
 import { register } from '../actions/authActions';
-// import { returnErrors } from '../actions/errorActions';
-
-import { Link } from 'react-router-dom';
+import { clearErrors } from '../actions/errorActions';
 
 const SignUp = () => {
+    const dispatch = useDispatch();
+    const history = useHistory();
+
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    // const [confirmPassword, setConfirmPassword] = useState('');
-    const [msg, setMsg] = useState(null);
+    const [errorMsg, setErrorMsg] = useState(null);
 
     const usernameChange = (e) => {
         setUsername(e.target.value);
@@ -19,37 +20,32 @@ const SignUp = () => {
         setPassword(e.target.value);
     }
 
-    const dispatch = useDispatch();
-
-    // useEffect(() => {
-    //     // dispatch(returnErrors());
-    // }, [dispatch]);
-
-    // const errorMsg = useSelector(state => state.msg);
-
-    // const confirmPasswordChange = (e) => {
-    //     setConfirmPassword(e.target.value);
-    // }
-/*
-
+    const error = useSelector(state => state.error);
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
     useEffect(() => {
-    }, [dispatch]);
+        if (isAuthenticated) {
+            // Navigate to Table route
+            history.push("/");
+        }
 
-    const isAuthenticated = useSelector(state => state.isAuthenticated);
-
-    console.log("isAuthenticated", isAuthenticated);
-*/
+        if(error.id === 'REGISTER_FAIL') {
+            setErrorMsg(error.msg.msg);
+        }
+        else {
+            setErrorMsg(null);
+        }
+    }, [error, isAuthenticated]);
 
     const signUp = (e) => {
         e.preventDefault();
 
-        // console.log("Attempting to register");
-
         const newUser = { username, password }; 
 
-        //attempt to register
+        // Attempt to register
         dispatch(register(newUser));
+        
+        dispatch(clearErrors());
     };
 
     return (
@@ -60,9 +56,12 @@ const SignUp = () => {
 
                 <h3>Sign Up</h3>
 
-                <input type="text" name="username" placeholder="Username"  onChange={(e) => usernameChange(e)}/>
+                {errorMsg && <div className="ErrorMsg">{errorMsg}</div>}
+
+                <label htmlFor="username">Username</label>
+                <input type="text" name="username" placeholder="Username" onChange={(e) => usernameChange(e)}/>
+                <label htmlFor="password">Password</label>
                 <input type="password" name="password" placeholder="New Password" onChange={(e) => passwordChange(e)}/>
-                {/* <input type="password" placeholder="confirmPassword" placeholder="Confirm Password" onChange={confirmPasswordChange}/> */}
                 <button onClick={(e) => signUp(e)}>Sign Up</button>
 
                 <p>Already have an account? <Link to="/Login">Log In</Link></p>

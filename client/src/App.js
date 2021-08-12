@@ -1,29 +1,16 @@
 import './App.scss';
-// import { useEffect } from 'react';
-
-import Game from './components/Game';
+import Routing from './components/Routing';
 
 import { Provider, useDispatch } from 'react-redux'; 
-// import store from './store';
-// import { loadUser } from './actions/authActions';
+import store from './store';
 
 function App() {
-
-  // store.dispatch(loadUser);
-  // const dispatch = useDispatch();
-
-  // useEffect(() => {
-  //   console.log("In app use effect");
-  //   dispatch(loadUser);
-
-  // }, [] );
-
   return (
-    // <Provider store={store}>
+    <Provider store={store}>
         <div className="App">
-          <Game />
+          <Routing />
         </div>
-    // </Provider>
+     </Provider>
   );
 }
 
