@@ -33,11 +33,24 @@ router.post('/', async (req, res) => {
             return res.status(400).json({msg: "Invalid Credentials"});
         }
 
-        const token = await jwt.sign(
-            { id: existingUser.id },
-            config.get('jwtSecret'),
-            { expiresIn: 3600 }
-        );
+        if (process.env.NODE_ENV === 'production') {
+            const token = await jwt.sign(
+                { id: newUser.id },
+                process.env.jwtSecret,
+                { expiresIn: 3600 }
+            )
+            .then(() => console.log('User Authencicated'))
+            .catch(err => console.log(err));
+        }
+        else {
+            const token = await jwt.sign(
+                { id: newUser.id },
+                config.get('jwtSecret'),
+                { expiresIn: 3600 }
+            )
+            .then(() => console.log('User Authencicated'))
+            .catch(err => console.log(err));
+        }
 
         return res.status(200).json({
             token,
