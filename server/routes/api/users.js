@@ -41,19 +41,17 @@ router.post('/', async (req, res) => {
         newUser.save();
 
         if (process.env.NODE_ENV === 'production') {
-            let JWTSecret = process.env.jwtSecret;
+            var JWTSecret = process.env.jwtSecret;
         }
         else {
-            let JWTSecret = config.get('jwtSecret');
+            var JWTSecret = config.get('jwtSecret');
         }
 
         const token = await jwt.sign(
             { id: newUser.id },
             JWTSecret,
             { expiresIn: 3600 }
-        )
-        .then(() => console.log('User Authencicated'))
-        .catch(err => console.log(err));
+        );
 
         return res.status(200).json({newUser: {
             token,
