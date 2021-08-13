@@ -9,14 +9,14 @@ import { loadUser } from '../actions/authActions';
 
 const Routing = () => {
     const dispatch = useDispatch();
-    const isAuthenticated = useSelector(state => state.isAuthenticated);
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
     useEffect(() => {
         if (!isAuthenticated) {
             dispatch(loadUser());
         }
-        
-    }, [dispatch, loadUser] );
+
+    }, [] );
   
     return (
         <Router>
