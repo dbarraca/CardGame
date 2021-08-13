@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux'; 
+import { useDispatch, useSelector } from 'react-redux'; 
 import Table from './Table';
 import Login from './Login';
 import SignUp from './SignUp';
@@ -9,9 +9,11 @@ import { loadUser } from '../actions/authActions';
 
 const Routing = () => {
     const dispatch = useDispatch();
+    const token = useSelector(state => state.token);
 
     useEffect(() => {
-      dispatch(loadUser());
+        if (!token)
+            dispatch(loadUser());
   
     }, [dispatch, loadUser] );
   
