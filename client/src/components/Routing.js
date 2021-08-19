@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux'; 
+import { useDispatch, useSelector } from 'react-redux'; 
 import Table from './Table';
 import Login from './Login';
 import SignUp from './SignUp';
@@ -11,15 +11,14 @@ const Routing = () => {
     const dispatch = useDispatch();
 
     useEffect(() => {
-      dispatch(loadUser());
-  
-    }, [dispatch, loadUser] );
+            dispatch(loadUser());
+    }, [] );
+    
   
     return (
         <Router>
             <Route path="/Login" >
                 <Login />
-                 {/* {loggedIn ? <Redirect to="/" /> : <Login /> */}
             </Route>
             
             <Route path="/SignUp" >
