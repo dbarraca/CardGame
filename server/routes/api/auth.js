@@ -70,6 +70,8 @@ router.get('/user', auth, async (req, res) => {
         if (!user) throw Error('User does not exist');
         res.status(200).json(user);
     } catch (e) {
+        console.log(e);
+        console.log(e.message );
         res.status(400).json({ msg: e.message });
     }
 });
