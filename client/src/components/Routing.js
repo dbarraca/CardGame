@@ -18,7 +18,8 @@ const Routing = () => {
             console.log("user", user);
             dispatch(loadUser());
         // }
-    // }, [isAuthenticated] );
+    }, [] );
+    // isAuthenticated
   
     return (
         <Router>
