@@ -48,8 +48,12 @@ router.post('/', async (req, res) => {
 
         return res.status(200).json({
             token,
-            id: existingUser.id,
-            username: existingUser.username
+            user: {
+                id: existingUser.id,
+                username: existingUser.username
+            }
+            // id: existingUser.id,
+            // username: existingUser.username
         });
     }
     catch (e) {

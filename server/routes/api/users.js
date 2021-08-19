@@ -55,9 +55,11 @@ router.post('/', async (req, res) => {
 
         return res.status(200).json({newUser: {
             token,
-            id: newUser.id,
-            username: newUser.username,
-            aiGamesWon: newUser.aiGamesWon
+            user: {
+                id: newUser.id,
+                username: newUser.username,
+                aiGamesWon: newUser.aiGamesWon
+            }
         }});
     }
     catch (e) {
