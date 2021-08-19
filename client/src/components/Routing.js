@@ -11,7 +11,7 @@ const Routing = () => {
     const dispatch = useDispatch();
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const user = useSelector(state => state.auth.user);
-
+/*
     useEffect(() => {
         // if (!isAuthenticated) {
             console.log("isAuthenticated", isAuthenticated);
@@ -20,6 +20,7 @@ const Routing = () => {
         // }
     }, [] );
     // isAuthenticated
+    */
   
     return (
         <Router>

@@ -11,8 +11,15 @@ function auth(req, res, next) {
     }
 
     try {
+        if (process.env.NODE_ENV === 'production') {
+            var JWTSecret = process.env.jwtSecret;
+        }
+        else {
+            var JWTSecret = config.get('jwtSecret');
+        }
+
         // Verify token
-        const decoded = jwt.verify(token, config.get('jwtSecret'));
+        const decoded = jwt.verify(token, JWTSecret);
 
         // Add user from payload
         req.user = decoded;
@@ -20,6 +27,8 @@ function auth(req, res, next) {
         next();
     }
     catch(e) {
+        console.log(e);
+        console.log(e.message );
         res.status(400).json({ msg: 'Token is not valid'});
     }
 }
