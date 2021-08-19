@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
         const token = await jwt.sign(
             { id: newUser.id },
             JWTSecret,
-            { expiresIn: 3600 }
+            { expiresIn: 36000 }
         );
 
         return res.status(200).json({newUser: {
