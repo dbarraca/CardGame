@@ -43,7 +43,7 @@ router.post('/', async (req, res) => {
         const token = await jwt.sign(
             { id: existingUser.id },
             JWTSecret,
-            { expiresIn: 86400 }
+            { expiresIn: 3600 }
         );
 
         return res.status(200).json({
@@ -52,8 +52,6 @@ router.post('/', async (req, res) => {
                 id: existingUser.id,
                 username: existingUser.username
             }
-            // id: existingUser.id,
-            // username: existingUser.username
         });
     }
     catch (e) {
@@ -72,8 +70,6 @@ router.get('/user', auth, async (req, res) => {
         if (!user) throw Error('User does not exist');
         res.status(200).json(user);
     } catch (e) {
-        console.log(e);
-        console.log(e.message );
         res.status(400).json({ msg: e.message });
     }
 });

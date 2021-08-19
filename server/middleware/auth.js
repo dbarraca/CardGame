@@ -27,8 +27,6 @@ function auth(req, res, next) {
         next();
     }
     catch(e) {
-        console.log(e);
-        console.log(e.message );
         res.status(400).json({ msg: 'Token is not valid'});
     }
 }
