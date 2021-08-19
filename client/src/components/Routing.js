@@ -12,17 +12,16 @@ const Routing = () => {
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
 
     useEffect(() => {
+        console.log("isAuthenticated", isAuthenticated);
         if (!isAuthenticated) {
             dispatch(loadUser());
         }
-
-    }, [] );
+    }, [isAuthenticated] );
   
     return (
         <Router>
             <Route path="/Login" >
                 <Login />
-                 {/* {loggedIn ? <Redirect to="/" /> : <Login /> */}
             </Route>
             
             <Route path="/SignUp" >

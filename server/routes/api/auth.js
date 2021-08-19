@@ -61,11 +61,13 @@ router.post('/', async (req, res) => {
 // @ desc   Get the user data using token
 // @ access Private
 router.get('/user', auth, async (req, res) => {
-    const user = await User.findById(req.user.id)
-        .select('-password').
-        then(user => res.json(user));
-
-    return res.status(200).json(user);
+    try {
+        const user = await User.findById(req.user.id).select('-password');
+        if (!user) throw Error('User does not exist');
+        res.status(200).json(user);
+    } catch (e) {
+        res.status(400).json({ msg: e.message });
+    }
 });
 
 
