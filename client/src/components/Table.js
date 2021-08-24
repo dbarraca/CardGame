@@ -1,10 +1,16 @@
 import { useState, useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { addUserAIWin } from '../actions/userActions';
 
 import PlayerSide from './PlayerSide';
 import AccountMenu from './AccountMenu';
 
 const Table = () => {
+    const dispatch = useDispatch();
+    const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
+    const loggedInUser = useSelector(state => state.auth.user);
+
     const [active, setActive]  = useState(false);
     const [winner, setWinner] = useState();
     const [wonTurn, setWonTurn] = useState("");
@@ -25,14 +31,6 @@ const Table = () => {
             hand: [],
             drawnCard: -1
         }
-        /*,
-        {
-            id: 3,
-            title: "Player 2",
-            position: "Right",
-            hand: [],
-            drawnCard: -1
-        }*/
     ]);
     const refPlayers = useRef(players);
 
@@ -89,12 +87,7 @@ const Table = () => {
 
         setInWar(rank1 === rank2);
 
-        // console.log(rank1, rank2);
-        // console.log(played);
-
         if(rank1 === rank2) {
-            // setInWar(true);
-            
             drawCard(players[0].id);
             drawCard(players[0].id);
             drawCard(players[0].id);
@@ -107,8 +100,6 @@ const Table = () => {
             }));
 
         } else {
-            // setInWar(false);
-
             if (rank1 > rank2) {
                 updatePlayers([ { ...player1, hand: [ ...player1.hand, ...played ], drawnCard: -1 }, { ...player2, drawnCard: -1} ]);
                 setWonTurn("TopWonTurn");
@@ -130,7 +121,14 @@ const Table = () => {
         let drawingPlayer = refPlayers.current.find(player => player.id === drawingPlayerID);
 
         if(!winner && drawingPlayer.hand.length <= 0) {
-            setWinner(refPlayers.current.find(player => player.id !== drawingPlayerID).title);
+            let winnerPlayer = refPlayers.current.find(player => player.id !== drawingPlayerID);
+
+            setWinner(winnerPlayer.title);
+
+            if (isAuthenticated && refPlayers.current[0].hand.length <= 0) {
+                dispatch(addUserAIWin(loggedInUser.id));
+            }
+
             setActive(false);
 
            return -1;
@@ -167,7 +165,8 @@ const Table = () => {
     const normalDraw = (drawingPlayerID) => {
         let card = drawCard(drawingPlayerID);
 
-        if (refPlayers.current[0].drawnCard >= 0 && refPlayers.current[1].drawnCard >= 0) {
+        if (refPlayers.current[0].drawnCard >= 0 && 
+            refPlayers.current[1].drawnCard >= 0) {
             setTimeout(() => {
                 compareCards();
             }, 900);
@@ -177,8 +176,10 @@ const Table = () => {
     }
 
     const bothDraw = () => {
-        normalDraw(refPlayers.current[0].id);
-        normalDraw(refPlayers.current[1].id);
+        if (active) {
+            normalDraw(refPlayers.current[0].id);
+            normalDraw(refPlayers.current[1].id);
+        }
     }
 
     return (
@@ -198,12 +199,10 @@ const Table = () => {
 
                                 :
                                 
-                                active &&
-                                players.map( (player, index) => {
-                                    // console.log("playerID", player.id);
-
-                                    return(
-                                        <PlayerSide player={player} key={index} drawCard={bothDraw} inWar={inWar}/> 
+                                active && 
+                                players.map((player) => {
+                                    return (
+                                        <PlayerSide player={player} key={player.id} drawCard={bothDraw} inWar={inWar}/> 
                                     )
                                 })
                             }

@@ -35,10 +35,7 @@ const Login = () => {
         else {
             setErrorMsg(null);
         }
-
-
-
-    }, [error, isAuthenticated]);
+    }, [error, isAuthenticated, history]);
 
     const logIn = (e) => {
         e.preventDefault();

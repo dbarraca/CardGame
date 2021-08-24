@@ -24,8 +24,6 @@ export const loadUser = () => (dispatch, getState) => {
             payload: res.data
         }))
         .catch(err => {
-            console.log(err);
-            console.log(err.response.data, err.response.status);
             dispatch(returnErrors(err.response.data, err.response.status, 'AUTH_ERROR'));
 
             dispatch({ type: AUTH_ERROR });
@@ -45,7 +43,6 @@ export const register = ({ username, password }) => dispatch => {
     const body = JSON.stringify({username, password});
 
     axios.post('/users', body, config)
-    // axios.post('/auth/user', body, config)
         .then(res => dispatch({
             type: REGISTER_SUCCESS,
             payload: res.data
@@ -110,5 +107,5 @@ export const tokenConfig = getState => {
         config.headers['x-auth-token'] = token;
     }
 
-    return config
+    return config;
 }
