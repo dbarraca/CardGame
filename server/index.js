@@ -14,7 +14,8 @@ if (process.env.NODE_ENV === 'production') {
     {
         useNewUrlParser: true,
         useCreateIndex: true,
-        useUnifiedTopology: true 
+        useUnifiedTopology: true,
+        useFindAndModify: false 
     })
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err));
@@ -25,7 +26,8 @@ else {
     mongoose.connect(db, {
         useNewUrlParser: true,
         useCreateIndex: true,
-        useUnifiedTopology: true 
+        useUnifiedTopology: true,
+        useFindAndModify: false
     })
     .then(() => console.log('MongoDB Connected...'))
     .catch(err => console.log(err));

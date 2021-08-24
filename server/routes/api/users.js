@@ -70,12 +70,12 @@ router.post('/', async (req, res) => {
 
 
 
-// auth,
+
 
 // @route   Post /users/ai
 // @ desc   Get all users' AI Games won
 // @ access Private
-router.get('/ai', async (req, res) => {
+router.get('/ai', auth, async (req, res) => {
     try {
         const users = await User.find().sort({aiGamesWon: -1});
 
@@ -87,6 +87,22 @@ router.get('/ai', async (req, res) => {
         });
 
         return res.status(200).json(AIGamesWon);
+    }
+    catch (e) {
+        return res.status(400).json({ msg: e.message });
+    }
+});
+
+// @route   Update /users/ai/win
+// @ desc   Update all users' AI Games won
+// @ access Private
+router.put('/ai/win/:id', auth, async (req, res) => {
+    try {
+        const user = await User.findOneAndUpdate({ _id: req.params.id}, {$inc: { aiGamesWon: 1} });
+
+        // const updatedUser = await User.findById(req.params.id);
+        
+        return res.status(200).json(user);
     }
     catch (e) {
         return res.status(400).json({ msg: e.message });

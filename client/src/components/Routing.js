@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'; 
+import { useDispatch } from 'react-redux'; 
 import Table from './Table';
 import Login from './Login';
 import SignUp from './SignUp';
@@ -12,7 +12,7 @@ const Routing = () => {
 
     useEffect(() => {
             dispatch(loadUser());
-    }, [] );
+    }, [dispatch] );
     
   
     return (

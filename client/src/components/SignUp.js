@@ -35,7 +35,7 @@ const SignUp = () => {
         else {
             setErrorMsg(null);
         }
-    }, [error, isAuthenticated]);
+    }, [error, isAuthenticated, history]);
 
     const signUp = (e) => {
         e.preventDefault();

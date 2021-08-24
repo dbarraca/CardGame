@@ -1,10 +1,17 @@
+import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Logout from './Logout';
     
 const AccountMenu = () => {
+    const [ userWins, setUserWins ]= useState();
     const isAuthenticated = useSelector(state => state.auth.isAuthenticated);
     const user = useSelector(state => state.auth.user);
+
+    useEffect(() => {
+        if(user)
+            setUserWins(user.aiGamesWon);
+    }, [user])
 
     const loggedOut = (
         <>
@@ -19,7 +26,7 @@ const AccountMenu = () => {
                 {user && 
                     <>
                         Welcome {user.username}, 
-                        <div className="UserWins">You have <b>{user.aiGamesWon}</b> wins against AI</div>
+                        <div className="UserWins">You have <b>{userWins}</b> wins against AI</div>
                     </>
                 }
             </div>
